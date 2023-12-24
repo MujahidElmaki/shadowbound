@@ -1,6 +1,7 @@
 import pygame, sys
 from settings import *
 from debug import debug
+from level import Level
 
  
 class Game:
@@ -13,6 +14,8 @@ class Game:
         pygame.display.set_caption('ShadowBound')
         pygame.display.set_icon(Icon)
         self.clock = pygame.time.Clock()
+
+        self.level = Level()
     
     def run(self):
         while True:
@@ -22,6 +25,7 @@ class Game:
                     sys.exit()
  
             self.screen.fill('black')
+            self.level.run()
             pygame.display.update()
             self.clock.tick(FPS)
  
