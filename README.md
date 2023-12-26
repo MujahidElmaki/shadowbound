@@ -17,4 +17,4 @@ In Shadowbound Saga, players venture through a grim world fraught with peril and
 
 ## Note
 
-This game is still a work in progress, annoucment will be made when its ready.
+This game is still a work in progress.

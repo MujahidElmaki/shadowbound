@@ -14,7 +14,6 @@ class Game:
         pygame.display.set_caption('ShadowBound')
         pygame.display.set_icon(Icon)
         self.clock = pygame.time.Clock()
-
         self.level = Level()
     
     def run(self):
