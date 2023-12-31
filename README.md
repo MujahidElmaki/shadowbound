@@ -6,7 +6,6 @@ Welcome to the Shadowbound Saga, a dark 2D adventure game where your courage is 
 
 ## About The Game
 
-
 In Shadowbound Saga, players venture through a grim world fraught with peril and shadow magic. Your journey is accompanied by a unique shadow pet, a creature born from the very essence of darkness that aids you in your quests.
 
 ## Features

@@ -6,9 +6,10 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = pygame.image.load('graphics/test/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
+        self.hitbox = self.rect.inflate(0,-26)
 
         self.direction = pygame.math.Vector2()
-        self.speed = 5
+        self.speed = 8
 
         self.obstical_sprites = obstical_sprites
         
@@ -33,29 +34,28 @@ class Player(pygame.sprite.Sprite):
         if self.direction.magnitude() != 0:
             self.direction = self.direction.normalize()
 
-        self.rect.x += self.direction.x * speed
+        self.hitbox.x += self.direction.x * speed
         self.collision('horizontal')
-        self.rect.y += self.direction.y * speed
+        self.hitbox.y += self.direction.y * speed
         self.collision('vertical')
-
-        # self.rect.center += self.direction * speed
+        self.rect.center = self.hitbox.center
 
     def collision(self, direction):
         if direction == 'horizontal':
             for sprite in self.obstical_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.x > 0: # Moving right
-                        self.rect.right = sprite.rect.left # move the player back 
+                        self.hitbox.right = sprite.hitbox.left # move the player back 
                     if self.direction.x < 0: 
-                        self.rect.left = sprite.rect.right
+                        self.hitbox.left = sprite.hitbox.right
 
         if direction == 'vertical':
             for sprite in self.obstical_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.y > 0: # Moving Up
-                        self.rect.bottom = sprite.rect.top # move the player back 
+                        self.hitbox.bottom = sprite.hitbox.top # move the player back 
                     if self.direction.y < 0: # Movind down
-                        self.rect.top = sprite.rect.bottom
+                        self.hitbox.top = sprite.hitbox.bottom
 
     def update(self):
         self.input()
