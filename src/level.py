@@ -5,6 +5,7 @@ from tile import Tile
 from player import Player
 from debug import debug
 from utilities import import_csv_layout, import_folder
+from weapon import Weapon
 
 class Level:
     def __init__(self):
@@ -14,6 +15,9 @@ class Level:
         # Sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+
+        # attack sprites
+        self.current_attack = None
 
         # sprite setup
         self.create_map()
@@ -45,15 +49,22 @@ class Level:
                             surf = graphics['objects'][int(col)]
                             Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf)
 
+        self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_weapon)
 
-
-        self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites)
+    def create_attack(self):
+        self.current_attack = Weapon(self.player, [self.visible_sprites])
+    
+    def destroy_weapon(self):
+        if self.current_attack:
+            self.current_attack.kill()
+        self.current_attack = None
 
     def run(self):
         # Update and draw the game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.status)
+        debug(self.player.rect.center)
+
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
