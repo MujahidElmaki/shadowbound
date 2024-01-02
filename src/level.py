@@ -4,6 +4,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
+from ui import UI
 from utilities import import_csv_layout, import_folder
 from weapon import Weapon
 
@@ -21,6 +22,9 @@ class Level:
 
         # sprite setup
         self.create_map()
+
+        # user interface
+        self.ui = UI()
 
     def create_map(self):
         layouts = {
@@ -49,11 +53,16 @@ class Level:
                             surf = graphics['objects'][int(col)]
                             Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf)
 
-        self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_weapon)
+        self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_weapon, self.create_magic)
 
     def create_attack(self):
         self.current_attack = Weapon(self.player, [self.visible_sprites])
     
+    def create_magic(self, style, strength, cost):
+        print(style)
+        print(strength)
+        print(cost)
+
     def destroy_weapon(self):
         if self.current_attack:
             self.current_attack.kill()
@@ -63,7 +72,7 @@ class Level:
         # Update and draw the game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.rect.center)
+        self.ui.display(self.player)
 
 
 class YSortCameraGroup(pygame.sprite.Group):
