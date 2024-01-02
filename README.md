@@ -18,3 +18,6 @@ In Shadowbound Saga, players venture through a grim world fraught with peril and
 ## Note
 
 This game is still a work in progress.
+
+# Development
+Run the main.py file to open up the game, you can use the debug helper in debug.py to display variables or objects
