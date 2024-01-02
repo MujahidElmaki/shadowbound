@@ -59,26 +59,27 @@ class UI:
         else: 
             pygame.draw.rect(self.display_surface, UI_BORDER_COLOUR, bg_rect, 3)
         return bg_rect
-    
-    def weapon_overlay(self, weapon_index, has_switched):
-        bg_rect = self.selection_box(10, 630, has_switched) # weapon
-        weapon_surf = self.weapon_graphics[weapon_index]
-        weapon_rect = weapon_surf.get_rect(center = bg_rect.center)
-        self.display_surface.blit(weapon_surf, weapon_rect)
-    
-    def magic_overlay(self, magic_index, has_switched):
-        bg_rect = self.selection_box(80, 635, has_switched)
-        magic_surf = self.magic_graphics[magic_index]
-        magic_rect = magic_surf.get_rect(center = bg_rect.center)
-        self.display_surface.blit(magic_surf, magic_rect)
-       
+
+    def overlay(self, overlay_index, has_switched,overlay_type):
+        if overlay_type ==WEAPON:
+            bg_rect = self.selection_box(10, 630, has_switched) # weapon
+            overlay_surf = self.weapon_graphics[overlay_index]
+        elif overlay_type ==MAGIC:
+            bg_rect = self.selection_box(80, 635, has_switched)
+            overlay_surf = self.magic_graphics[overlay_index]
+        else:
+            print('overlay type not found')
+            return
+        
+        magic_rect = overlay_surf.get_rect(center = bg_rect.center)
+        self.display_surface.blit(overlay_surf, magic_rect)
+
     def display(self, player):
         self.show_bar(player.health, player.stats['health'], self.health_bar_rect, HEALTH_COLOUR)
         self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, ENERGY_COLOUR)
         self.show_bar(player.endurance, player.stats['endurance'], self.endurance_bar_rect, ENDURANCE_COLOUR)
 
         self.show_exp(player.exp)
-        self.weapon_overlay(player.weapon_index, not player.can_switch_weapon)
-        self.magic_overlay(player.magic_index, not player.can_switch_magic)
 
-        
+        self.overlay(player.weapon_index, not player.can_switch_weapon,overlay_type=WEAPON)
+        self.overlay(player.magic_index, not player.can_switch_magic,overlay_type=MAGIC)
