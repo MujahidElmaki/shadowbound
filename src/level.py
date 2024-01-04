@@ -7,6 +7,7 @@ from debug import debug
 from ui import UI
 from utilities import import_csv_layout, import_folder
 from weapon import Weapon
+from enemy import Enemy
 
 class Level:
     def __init__(self):
@@ -30,7 +31,8 @@ class Level:
         layouts = {
             'boundary': import_csv_layout('map/map_FloorBlocks.csv'),
             'grass': import_csv_layout('map/map_Grass.csv'),
-            'object': import_csv_layout('map/map_LargeObjects.csv')
+            'object': import_csv_layout('map/map_LargeObjects.csv'),
+            'entities': import_csv_layout('map/map_Entities.csv')
         }
         
         graphics = {
@@ -53,7 +55,25 @@ class Level:
                             surf = graphics['objects'][int(col)]
                             Tile((x, y), [self.visible_sprites, self.obstacle_sprites], 'object', surf)
 
-        self.player = Player((2000, 1430), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_weapon, self.create_magic)
+                        if style == 'entities':
+                            if col == '394':
+                               self.player = Player(
+                                    (x,y), 
+                                    [self.visible_sprites], 
+                                    self.obstacle_sprites, 
+                                    self.create_attack, 
+                                    self.destroy_weapon, self.create_magic
+                                )
+                            else:
+                                monster_names = {
+                                    '390': 'bamboo',
+                                    '391': 'spirit',
+                                    '392': 'raccoon',
+                                }   
+                                monster_name = monster_names.get(col, 'squid')
+                                Enemy(monster_name, (x,y), [self.visible_sprites], self.obstacle_sprites) 
+
+        
 
     def create_attack(self):
         self.current_attack = Weapon(self.player, [self.visible_sprites])
