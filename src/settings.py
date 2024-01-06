@@ -12,6 +12,9 @@ ENDURANCE_BAR_WIDTH = 150
 ITEM_BOX_SIZE = 80
 UI_FONT = 'graphics/font/joystix.ttf'
 UI_FONT_SIZE = 18
+WEAPON ='weapon'
+MAGIC ='magic'
+
 
 # General Colours
 WATER_COLOUR = '#71ddee'
