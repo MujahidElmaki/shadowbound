@@ -19,7 +19,7 @@ class Entity(pygame.sprite.Sprite):
 
     def collision(self, direction):
         if direction == 'horizontal':
-            for sprite in self.obstical_sprites:
+            for sprite in self.obstacle_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.x > 0: # Moving right
                         self.hitbox.right = sprite.hitbox.left # move the player back 
@@ -27,7 +27,7 @@ class Entity(pygame.sprite.Sprite):
                         self.hitbox.left = sprite.hitbox.right
 
         if direction == 'vertical':
-            for sprite in self.obstical_sprites:
+            for sprite in self.obstacle_sprites:
                 if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.y > 0: # Moving Up
                         self.hitbox.bottom = sprite.hitbox.top # move the player back 

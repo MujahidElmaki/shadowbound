@@ -4,7 +4,7 @@ from utilities import import_folder
 from entity import Entity
 
 class Player(Entity):
-    def __init__(self, pos, groups, obstical_sprites, create_attack, destroy_weapon, create_magic):
+    def __init__(self, pos, groups, obstacle_sprites, create_attack, destroy_weapon, create_magic):
         super().__init__(groups)
         self.image = pygame.image.load('graphics/test/player.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
@@ -18,7 +18,7 @@ class Player(Entity):
         self.attacking = False
         self.attack_cooldown = 400
         self.attack_time = None
-        self.obstical_sprites = obstical_sprites
+        self.obstacle_sprites = obstacle_sprites
 
         # weapon
         self.create_attack = create_attack
