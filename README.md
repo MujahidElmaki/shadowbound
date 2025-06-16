@@ -2,7 +2,8 @@
 
 Welcome to the Shadowbound Saga, a dark 2D adventure game where your courage is tested against shadow foes and ancient mysteries.
 
-![shadowbound](https://github.com/MujahidElmaki/shadowbound/assets/43341960/4b5e8468-4e5d-4417-809a-29fc7c521f8d)
+![image](https://github.com/user-attachments/assets/b4410c2e-49c4-472c-8b43-c9994ffb43c6)
+
 
 ## About The Game
 
